@@ -12,7 +12,7 @@ completion = openai.Completion()
 startsequence = "\n Py:"
 restartsequence = "\n You:"
 
-def question(question, chat_log=None):
+def ask(question, chat_log=None):
     prompttext = f'{chat_log}{restartsequence}: {question}{startsequence}'
     responce = openai.Completion.create(model="text-davinci-003",max_tokens=150,top_p=1,frequency_penalty=0.47,presence_penalty=0.21,stop = ["\n"])
     story = responce['choices'][0]['text']
