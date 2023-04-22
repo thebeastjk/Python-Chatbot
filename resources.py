@@ -1,6 +1,8 @@
 def micrec(r,mic):
-
+    
     import speech_recognition as sr
+    r = sr.Recognizer()
+    mic = sr.Microphone()
     if not isinstance(r, sr.Recognizer):
         raise TypeError("`r` must be `Recognizer` instance")
 
@@ -21,9 +23,9 @@ def speak(text):
     engine.runAndWait()
 
 def mic_loop():
+    import speech_recognition as sr
     r = sr.Recognizer()
     mic = sr.Microphone()
-    import speech_recognition as sr
     try:
         text=micrec(r,mic)
     except sr.RequestError:
