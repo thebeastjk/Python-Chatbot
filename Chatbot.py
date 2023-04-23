@@ -17,7 +17,7 @@ def generate_response(prompt):
 
     # Generate a new response using the OpenAI API
     chat = openai.Completion.create(
-        engine="text-curie-001",
+        engine="ada",
         prompt=prompt,
         max_tokens=150,
         n=1,
