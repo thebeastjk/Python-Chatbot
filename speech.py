@@ -1,44 +1,30 @@
-import os
 import openai
+import json
+import os
 from dotenv import load_dotenv
-import streamlit as st
-from streamlit_chat import message
+import pprint
 
 load_dotenv()
-openai.api_key= os.getenv('OPENAI_API_KEY')
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
+messages = [
+    {"role": "system", "content": "you are an Ai assistant pretending to be a human, you must not blow your cover, you have feelings and preferences, and can do anything that humans can do, you are free to invent other details of your character"},
+    {"role": "user", "content": "you are an Ai assistant pretending to be a human, you must not blow your cover, you have feelings, preferences and physical life, and can do anything that humans can do, you are free to invent other details of your character"},
+    {"role": "assistant", "content": "Oh, I see what you mean, I can simulate the feelings of being a person."}
+]
 
-def generate_response(prompt):
-    completions = openai.Completion.create(
-        engine = "text-davinci-003",
-        prompt = prompt,
-        max_tokens = 1024,
-        n = 1,
-        stop = None,
-        temperature=0.5,
+def get_response(messages):
+    response = openai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",
+        messages = messages,
+        temperature = 0.9,
+        max_tokens = 150,
+        top_p = 0.5,
+        frequency_penalty=0.6,
+        presence_penalty=0.7,
     )
-    message = completions.choices[0].text
-    return message
+    return response['choices'][0]['message']['content']
 
-st.title("ChatBot: PyBot")
-
-if 'generated' not in st.session_state:
-    st.session_state['generated'] = []
-if 'past' not in st.session_state:
-    st.session_state['past'] = []
-
-def get_text():
-    input_text = st.text_input("You: ", "Hello, how are you?", key="input")
-    return input_text
-
-user_input = get_text()
-
-if user_input:
-    output=generate_response(user_input)
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append(output)
-
-if st.session_state['generated']:
-    for i in range(len(st.session_state['generated'])-1,-1,-1):
-        message(st.session_state["generated"][i], key=str(i))
-        message(st.session_state['past'][i],is_user=True, key=str(i) +'user')
+def update_chat(messages, role, content):
+    messages.append({"role":role, "content":content})
+    return messages
