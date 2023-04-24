@@ -21,4 +21,8 @@ Feel free to use the code there, as it's really just `Speech_Recognition` and `P
 ## Speech
 
 The name is misleading, but import this file gives an easy way to talk to the openai api, if you're looking to set it up, check ChatBot.py to see how to I did it.
-Again, feel free to use this wherever you want. *Requires* `Openai` *and* `dotenv`
+Again, feel free to use this wherever you want. 
+
+## Requirements
+
+Requires `Speech_Recognition`, `PyTtsx3`, `Openai`, and `dotenv` to work
