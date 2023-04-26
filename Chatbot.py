@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import openai
 import os
 import resources
-from speech import get_response,update_chat, messages
+from speech import get_response,update_chat
 import speech
 
 load_dotenv()
@@ -12,7 +12,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 Textbased = True
 Audiobased = False
 
-messages = messages
+
 def loop(Textbased, Audiobased):
     messages = speech.messages
     while Textbased:
@@ -40,5 +40,5 @@ def loop(Textbased, Audiobased):
             modelresponse = get_response(messages)
             messages = update_chat(messages, "assistant", modelresponse)
             resources.speak(modelresponse)
-
+speech.__init__(input('Session ID: '))
 loop(Textbased, Audiobased)
