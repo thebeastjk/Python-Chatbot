@@ -25,7 +25,7 @@ def __init__(ChosenID = lastSessionID+1):
         messages = df[["role","content"]].loc[df['sessionID'] == ChosenID].to_json(orient='records')  
     else:
         df.loc[len(df.index)] = ["System", "Begin chat", datetime.now(), lastSessionID+1]
-        messages = df[["role","content"]].loc(df['sessionID'] == lastSessionID+1).all().to_json(orient='records')
+        messages = df[["role","content"]].loc(df['sessionID'] == lastSessionID+1).to_json(orient='records')
  
     return messages
 
