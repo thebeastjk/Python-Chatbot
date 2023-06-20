@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 datasettest.py
 Model/ggml-model-q4_1.bin
+llama/ggml-alpaca-7b-q4.bin
