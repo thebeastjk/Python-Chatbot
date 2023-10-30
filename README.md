@@ -2,6 +2,8 @@
 # Python-Chatbot
 just another python chatbot
 
+## THIS IS BROKEN DO NOT USE
+
 ## Startup
 
 If you want to use this, just clone the git and create a .env file inside the folder, simply put your openai api key inside the .env file like so:
